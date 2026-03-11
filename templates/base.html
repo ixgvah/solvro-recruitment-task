@@ -1,0 +1,57 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> {% block title %} Solvro App {% endblock %} </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+</head>
+<body>
+    <div>
+        <header>
+        <nav>
+            <div class="logo">
+                <img id='page-icon' src="{% static 'icons/glass-coctail-svgrepo-com.svg' %}" alt="Ikona">
+                <h1 id="page-name">CocktailMIX</h1>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a class='menu-labels' href="/">HOME</a></li>
+                <li><a class='menu-labels' href="/cocktails/">COCKTAILS</a></li>
+                <li><a class='menu-labels' href="/about/">ABOUT COCKTAILS</a></li>
+            </ul>
+        <div class="nav-login">
+          <a href="#" class="log-btn">LOG IN</a>
+          <a href="#" class="log-btn">SIGN UP</a>
+        </div>
+  </nav>
+    </header>
+    </div>
+    <main>
+        
+    {% block content %}
+        
+    {% endblock %}
+    </main>
+    
+    <footer>
+    <div class="footer-top">
+        <div class="footer-brand">
+            <img id="page-icon" src="{% static 'icons/glass-coctail-svgrepo-com.svg' %}" alt="Ikona">
+            <h3 id="page-name">CocktailMIX</h3>
+            <p>Znajdź idealny koktajl na każdą okazję.</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>Made with LOVE by Iga Posturzyńska</p>
+    </div>
+</footer>
+</body>
+</html>

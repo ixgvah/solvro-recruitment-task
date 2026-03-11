@@ -1,0 +1,224 @@
+nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 72px;
+      background: #CCCCCC;
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #CCCCCC;
+}
+
+.nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #2D2B2A;
+      position: relative;
+      transition: color 0.2s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 2px;
+      background: #780A12;
+      transition: width 0.3s;
+    }
+
+.nav-links a:hover { color: #780A12 }
+.nav-links a:hover::after { width: 100%; }
+.nav-links a.active { color: #780A12 }
+.nav-links a.active::after { width: 100%; }
+
+#page-icon{
+      height: 3rem;
+}
+
+#page-name{
+    color: #780A12;
+    font-family: 'Marble-ExtraBold', sans-serif;
+}
+
+
+#menu-labels {
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-links li {
+    border-right: 1px solid #2D2B2A;
+    padding-right: 2.5rem;
+}
+
+.nav-links li:last-child {
+    border-right: none;
+}
+
+.log-btn {
+    border: 2px solid #2D2B2A;
+    color: #2D2B2A;
+    background: transparent;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.log-btn:hover {
+    background: #2D2B2A;
+    color: #CCCCCC;
+}
+
+
+footer {
+    background: #2D2B2A;
+    color: #CCCCCC;
+    padding: 3rem 5%;
+    margin-top: 4rem;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+    margin-bottom: 2rem;
+}
+
+.footer-brand p {
+    font-size: 0.88rem;
+    margin-top: 0.5rem;
+    max-width: 220px;
+    opacity: 0.75;
+}
+
+.footer-col h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #F3E3D0;
+    margin-bottom: 1rem;
+}
+
+.footer-col ul {
+    list-style: none;
+}
+
+.footer-col ul li {
+    margin-bottom: 0.6rem;
+}
+
+.footer-col ul li a {
+    text-decoration: none;
+    color: rgba(255,255,255,0.6);
+    font-size: 0.88rem;
+    transition: color 0.2s;
+}
+
+.footer-col ul li a:hover {
+    color: #F3E3D0;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 1.5rem;
+    text-align: center;
+    font-size: 0.82rem;
+    opacity: 0.6;
+}
+
+body {
+    font-family: "Ubuntu", sans-serif;
+    background-color: #F9F7F6;
+}
+
+main {
+    padding-top: 72px;
+}
+
+@font-face {
+    font-family: 'Marble-ExtraBold';
+    src: url('../fonts/Marble-ExtraBold-pl-final.ttf') format('truetype');
+}
+
+.cocktail-card {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    height: 20rem;
+    width: 50rem;
+    margin: 0 auto 2rem auto;
+    border: 3px solid #A7A4A0;
+    border-radius: 10px;
+}
+.drink_photo{
+    height: 15rem;
+    margin-left: 2.5rem;
+    margin-top: 2.5rem;
+    border: 2px solid #2D2B2A;
+    border-radius: 5px;
+    flex-shrink: 0;
+    max-width: 10rem;
+}
+
+.cocktail-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+}
+
+.drink_name{
+    margin-top: 2.5rem;
+    font-size: 2rem;
+}
+
+.drink_category{
+    font-size: 0.7rem;
+    color: #F9F7F6;
+    background-color: #780A12;
+    padding: 0.5rem 1rem;
+    max-width: 40px;
+    border-radius: 16px;
+}
+
+.drink_description{
+
+}
+
+#header_cocktail_list {
+    text-align: center;
+    margin-top: 4rem;
+    margin-bottom: 3rem;
+    font-family: 'Marble-ExtraBold', sans-serif;
+    font-size: 3rem;
+    margin-left: 11rem;
+}
+
+.header_block{
+    margin-left: 4rem;
+    margin-top: 2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 6rem;
+}
+
+#cocktail_list_text{
+    width: 30rem;
+    font-family: "Ubuntu", sans-serif;
+}

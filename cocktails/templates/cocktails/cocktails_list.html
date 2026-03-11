@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Cocktails List
+{% endblock %}
+
+{% block content %}
+<section id="about">
+    <div>
+        <div class="header_block">
+            <h1 id='header_cocktail_list'>Cocktail list</h1>
+        <p id="cocktail_list_text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+        </div>
+
+        {% for cocktail in cocktails %}
+        {% include 'cocktails/cocktail_index.html' with cocktail=cocktail %}
+    {% endfor %}
+    </div>
+
+  </section>
+{% endblock %}
