@@ -10,4 +10,7 @@ urlpatterns = [
     path('about/', views.about),
     path('mix-your-drinks/', views.mix_your_drinks),
     path('cocktails/', include('cocktails.urls')),
+    path('users/', include('users.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+#tu nie dodawaj name

@@ -22,14 +22,27 @@
                 <h1 id="page-name">CocktailMIX</h1>
             </div>
             
-            <ul class="nav-links">
-                <li><a class='menu-labels' href="/">HOME</a></li>
-                <li><a class='menu-labels' href="/cocktails/">COCKTAILS</a></li>
-                <li><a class='menu-labels' href="/about/">ABOUT COCKTAILS</a></li>
-            </ul>
+        <ul class="nav-links">
+        <li><a class='menu-labels' href="/">HOME</a></li>
+        <li><a class='menu-labels' href="/cocktails/">COCKTAILS</a></li>
+        <li><a class='menu-labels' href="/about/">ABOUT COCKTAILS</a></li>
+        
+    {% if request.user.is_authenticated %}
+        <li><a class='menu-labels' href="">MY COCKTAILS</a></li>
+    {% endif %}
+        </ul>
         <div class="nav-login">
-          <a href="#" class="log-btn">LOG IN</a>
-          <a href="#" class="log-btn">SIGN UP</a>
+            {% if request.user.is_authenticated %}
+                <form method="POST" action="{% url 'users:logout' %}">
+                    {% csrf_token %}
+                    <button type="submit"  class="log-btn">LOG OUT</button>
+                </form>
+                
+                <img src="{% static 'icons/user.svg' %}">
+            {% else %}
+                <a href="/users/login" class="log-btn">LOG IN</a>
+                <a href="/users/register" class="log-btn">SIGN UP</a>
+            {% endif %}
         </div>
   </nav>
     </header>
