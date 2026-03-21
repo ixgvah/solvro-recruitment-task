@@ -1,3 +1,10 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+
 nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -9,7 +16,6 @@ nav {
       height: 72px;
       background: #CCCCCC;
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid #CCCCCC;
 }
 
 .nav-links {
@@ -66,6 +72,17 @@ nav {
 .nav-links li {
     border-right: 1px solid #2D2B2A;
     padding-right: 2.5rem;
+}
+
+.nav-login{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+#user-icon{
+    width: 2.7rem;
 }
 
 .nav-links li:last-child {
@@ -210,8 +227,9 @@ main {
     margin-left: 11rem;
 }
 
-.header_block{
-    margin-left: 4rem;
+.header_block {
+    padding-top: 2rem;
+    margin-left: 5%;
     margin-top: 2rem;
     display: flex;
     align-items: flex-start;
@@ -265,3 +283,48 @@ main {
 #register_logo{
     margin-top: 4rem;
 }
+
+.small_nav {
+    position: sticky;
+    top: 72px;
+    z-index: 99;
+    height: 2.5rem;
+    width: 100%;
+    background-color: #A7A4A0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 5%;
+}
+main {
+    padding-top: 72px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.small_nav a {
+    color: white;
+    text-decoration: none;
+    padding: 0.3rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+
+.small_nav a:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.small_nav a.active {
+    background: #780A12;
+    color: #780A12;
+    font-weight: 600;
+}
+
+
+#about {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 5%;
+}
+

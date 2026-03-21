@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    My Cocktails
+{% endblock %}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+    <div class="small_nav">
+                <a href="{% url 'cocktails' %}">COCKTAILS</a>
+                <a>STARRED</a>
+                <a>CREATE</a>
+    </div>
+    {% endif %}
+<section>
+    <div>
+        <h1>My Cocktails</h1>
+
+        {% for cocktail in cocktails %}
+            {% include 'cocktails/cocktail_index.html' with cocktail=cocktail %}
+        {% empty %}
+            <p>Nie masz jeszcze żadnych koktajli.</p>
+            <a href="/cocktails/create/">Create your own Cocktail!</a>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

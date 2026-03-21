@@ -5,6 +5,13 @@
 {% endblock %}
 
 {% block content %}
+    {% if request.user.is_authenticated %}
+    <div class="small_nav">
+                <a href="{% url 'users_cocktails' %}" class="small_nav_my_cocktails">MY COCKTAILS</a>
+                <a class="ACTIVE" href="user_favourite_cocktails.html/">STARRED</a>
+                <a href="/cocktails/create/">CREATE</a>
+    </div>
+    {% endif %}
 <section id="about">
     <div>
         <div class="header_block">

@@ -28,7 +28,7 @@
         <li><a class='menu-labels' href="/about/">ABOUT COCKTAILS</a></li>
         
     {% if request.user.is_authenticated %}
-        <li><a class='menu-labels' href="">MY COCKTAILS</a></li>
+        <li><a class='menu-labels' href="{% url 'users_cocktails' %}">INGREDIENTS</a></li>
     {% endif %}
         </ul>
         <div class="nav-login">
@@ -38,7 +38,7 @@
                     <button type="submit"  class="log-btn">LOG OUT</button>
                 </form>
                 
-                <img src="{% static 'icons/user.svg' %}">
+                <img src="{% static 'icons/user.svg' %}" id="user-icon">
             {% else %}
                 <a href="/users/login" class="log-btn">LOG IN</a>
                 <a href="/users/register" class="log-btn">SIGN UP</a>

@@ -13,15 +13,6 @@
         </div>
 
         <div id="register_form">
-{#            <div id="register_text">#}
-{#                <h2>Hello again!</h2>#}
-{#            <h4>Log in to your Cocktail Mix account</h4>#}
-{#            </div>#}
-{#            <h4>Email address</h4>#}
-{#            <input type="email" placeholder="Email address">#}
-{#            <h4>Password</h4>#}
-{#            <input type="password" placeholder="Password">#}
-{#            <button class="form-submit">Log in</button>#}
             <form method="POST" action="{% url 'users:login' %}">
         {% csrf_token %}
 

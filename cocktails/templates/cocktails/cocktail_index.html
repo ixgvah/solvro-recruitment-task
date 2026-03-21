@@ -11,5 +11,14 @@
         <h2 class="drink_name">{{ cocktail.name }}</h2>
         <h3 class="drink_category">{{ cocktail.category }}</h3>
         <p class="drink_description">{{ cocktail.description }}</p>
+
+       {% if request.user == cocktail.user %}
+        <a href="/cocktails/{{ cocktail.id }}/edit/">EDIT</a>
+        <form method="POST" action="/cocktails/{{ cocktail.id }}/delete/">
+            {% csrf_token %}
+            <button type="submit">DELETE</button>
+        </form>
+    {% endif %}
     </div>
+
 </div>

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Create your own cocktaill{% endblock %}
+
+{% block content %}
+<section>
+    <div>
+        <h1>Add tour cocktail</h1>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">SUBMIT</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

@@ -8,7 +8,10 @@ def register_view(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
+            print("zapisano")
             return redirect('/cocktails/')
+        else:
+            print(form.errors)
     else:
         form = CustomUserCreationForm()
     return render(request, "users/register.html", {"form": form})
@@ -20,6 +23,10 @@ def login_view(request):
             user = form.get_user()
             login(request, user)
             return redirect('/cocktails/')
+        else:
+            print(form.errors)
+
+
     else:
         form = AuthenticationForm()
     return render(request, 'users/login.html', {"form": form})
