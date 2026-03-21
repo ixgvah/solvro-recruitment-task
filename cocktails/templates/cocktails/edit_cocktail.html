@@ -9,7 +9,21 @@
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">SUBMIT</button>
+
+            {{ formset.management_form }}
+            <h3>Składniki</h3>
+            {% for ingredient_form in formset %}
+                <div class="ingredient_row">
+                    {{ ingredient_form.ingredient }}
+                    {{ ingredient_form.quantity }}
+                    {{ ingredient_form.unit }}
+                    {% if ingredient_form.instance.pk %}
+                        {{ ingredient_form.DELETE }} <label>Usuń</label>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <button type="submit">Zapisz</button>
         </form>
     </div>
 </section>

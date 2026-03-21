@@ -7,34 +7,32 @@
 {% block content %}
     {% if request.user.is_authenticated %}
     <div class="small_nav">
-                <a href="{% url 'users_cocktails' %}" class="small_nav_my_cocktails">MY COCKTAILS</a>
-                <a href="/cocktails/users_favourite_cocktails/">STARRED</a>
-                <a href="/cocktails/create/">CREATE</a>
+                <a href="{% url 'create_ingredient' %}">ADD MORE</a>
     </div>
     {% endif %}
 <section id="about">
     <div>
         <div class="header_block">
-            <h1 id='header_cocktail_list'>Cocktail list</h1>
+            <h1 id='header_cocktail_list'>INGREDIENTS</h1>
         <p id="cocktail_list_text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
         </div>
 
-        {% for cocktail in cocktails %}
-        {% include 'cocktails/cocktail_index.html' with cocktail=cocktail %}
+        {% for ingredient in ingredients %}
+        {% include 'ingredients/ingredient_index.html' with ingredient=ingredient %}
     {% endfor %}
-    </div>
 
     <div class="pagination">
-    {% if cocktails.has_previous %}
-        <a href="?page={{ cocktails.previous_page_number }}">←</a>
+    {% if ingredients.has_previous %}
+        <a href="?page={{ ingredients.previous_page_number }}">←</a>
     {% endif %}
 
-    <span>{{ cocktails.number }} / {{ cocktails.paginator.num_pages }}</span>
+    <span>{{ ingredients.number }} / {{ ingredients.paginator.num_pages }}</span>
 
-    {% if cocktails.has_next %}
-        <a href="?page={{ cocktails.next_page_number }}">→</a>
+    {% if ingredients.has_next %}
+        <a href="?page={{ ingredients.next_page_number }}">→</a>
     {% endif %}
 </div>
+    </div>
 
   </section>
 {% endblock %}

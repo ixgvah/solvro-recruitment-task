@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}ADD INGREDIENT{% endblock %}
+
+{% block content %}
+<section>
+    <div>
+        <h1>ADD INGREDIENT</h1>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">SUBMIT</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

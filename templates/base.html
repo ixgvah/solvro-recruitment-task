@@ -28,7 +28,7 @@
         <li><a class='menu-labels' href="/about/">ABOUT COCKTAILS</a></li>
         
     {% if request.user.is_authenticated %}
-        <li><a class='menu-labels' href="{% url 'users_cocktails' %}">INGREDIENTS</a></li>
+        <li><a class='menu-labels' href="{% url 'ingredients_list' %}">INGREDIENTS</a></li>
     {% endif %}
         </ul>
         <div class="nav-login">

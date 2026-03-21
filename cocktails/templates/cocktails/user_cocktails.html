@@ -9,8 +9,8 @@
 {% if request.user.is_authenticated %}
     <div class="small_nav">
                 <a href="{% url 'cocktails' %}">COCKTAILS</a>
-                <a>STARRED</a>
-                <a>CREATE</a>
+                <a href="/cocktails/users_favourite_cocktails/">STARRED</a>
+                <a href="/cocktails/create/">CREATE</a>
     </div>
     {% endif %}
 <section>

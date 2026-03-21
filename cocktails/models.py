@@ -43,7 +43,7 @@ class CocktailIngrediets(models.Model):
     unit = models.CharField(max_length=50, choices=POSSIBLE_UNITS, default='ml')
 
     def __str__(self):
-        return f"{self.ingredient}: {self.quantity} {self.unit}"  # brakuje self. i cudzysłów był przed f
+        return f"{self.ingredient}: {self.quantity} {self.unit}"
 
 class UsersFavouriteCocktails(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

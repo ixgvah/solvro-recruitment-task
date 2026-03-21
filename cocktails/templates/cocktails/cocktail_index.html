@@ -1,24 +1,33 @@
 {% load static %}
 <div class="cocktail-card">
 
-    {% if cocktail.image %}
-    <img src="{{ cocktail.image.url }}" alt="{{ cocktail.name }}" class="drink_photo">
-    {% else %}
-    <img src="{% static 'icons/glass-coctail-svgrepo-com.svg' %}" alt="{{ cocktail.name }}" class="drink_photo">
-    {% endif %}
+    <a href="{% url 'cocktail_details' cocktail.id %}">
+        {% if cocktail.image %}
+        <img src="{{ cocktail.image.url }}" alt="{{ cocktail.name }}" class="drink_photo">
+        {% else %}
+        <img src="{% static 'icons/glass-coctail-svgrepo-com.svg' %}" alt="{{ cocktail.name }}" class="drink_photo">
+        {% endif %}
+    </a>
+
+    <form method="POST" action="{% url 'toggle-star' cocktail.id %}">
+        {% csrf_token %}
+        <button class="starred_button"><img src="{% static 'icons/starred.svg' %}"></button>
+    </form>
 
     <div class="cocktail-card-body">
-        <h2 class="drink_name">{{ cocktail.name }}</h2>
+        <a href="{% url 'cocktail_details' cocktail.id %}">
+            <h2 class="drink_name">{{ cocktail.name }}</h2>
+        </a>
         <h3 class="drink_category">{{ cocktail.category }}</h3>
         <p class="drink_description">{{ cocktail.description }}</p>
 
-       {% if request.user == cocktail.user %}
-        <a href="/cocktails/{{ cocktail.id }}/edit/">EDIT</a>
-        <form method="POST" action="/cocktails/{{ cocktail.id }}/delete/">
+        {% if request.user == cocktail.user %}
+        <a href="{% url 'edit_cocktail' cocktail.id %}">EDIT</a>
+        <form method="POST" action="{% url 'delete_cocktail' cocktail.id %}">
             {% csrf_token %}
             <button type="submit">DELETE</button>
         </form>
-    {% endif %}
+        {% endif %}
     </div>
 
 </div>

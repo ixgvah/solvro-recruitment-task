@@ -7,8 +7,8 @@
 {% block content %}
     {% if request.user.is_authenticated %}
     <div class="small_nav">
-                <a href="{% url 'users_cocktails' %}" class="small_nav_my_cocktails">MY COCKTAILS</a>
-                <a class="ACTIVE">STARRED</a>
+                <a href="/cocktails/cocktail_list">COCKTAILS</a>
+                <a href="/cocktails/users_cocktails">MY COCKTAILS</a>
                 <a href="/cocktails/create/">CREATE</a>
     </div>
     {% endif %}

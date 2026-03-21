@@ -3,14 +3,30 @@
 {% block title %}Create your own cocktaill{% endblock %}
 
 {% block content %}
+    <div class="small_nav">
+                <a href="{% url 'cocktails' %}">COCKTAILS</a>
+                <a href="/cocktails/users_cocktails">MY COCKTAILS</a>
+                <a href="/cocktails/users_favourite_cocktails/">STARRED</a>
+    </div>
 <section>
     <div>
-        <h1>Add tour cocktail</h1>
+        <h1>Add your cocktail</h1>
         <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">SUBMIT</button>
-        </form>
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    {{ formset.management_form }}
+    <h3>INGREDIENTS</h3>
+    {% for ingredient_form in formset %}
+        <div class="ingredient_row">
+            {{ ingredient_form.ingredient }}
+            {{ ingredient_form.quantity }}
+            {{ ingredient_form.unit }}
+        </div>
+    {% endfor %}
+
+    <button type="submit">SUBMIT</button>
+</form>
     </div>
 </section>
 {% endblock %}
