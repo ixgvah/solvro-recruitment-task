@@ -135,9 +135,9 @@ def delete_ingredient(request, pk):
             ingredient.delete()
             return redirect('ingredients_list')
         except ProtectedError:
-            return render(request, 'ingredients/edit_ingredient.html', {
-                'error': 'You cannot delete an ingredient connected to a cocktail'
-            })
+            return render(request, 'ingredients/delete_ingredient.html', {'ingredient': ingredient,
+                'error': 'You cannot delete an ingredient connected to a cocktail'})
+
 
 @login_required
 def create_ingredient(request):
