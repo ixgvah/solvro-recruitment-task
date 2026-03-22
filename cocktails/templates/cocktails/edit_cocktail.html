@@ -11,19 +11,21 @@
             {{ form.as_p }}
 
             {{ formset.management_form }}
-            <h3>Składniki</h3>
+            <h3>INGREDIENTS</h3>
             {% for ingredient_form in formset %}
                 <div class="ingredient_row">
                     {{ ingredient_form.ingredient }}
                     {{ ingredient_form.quantity }}
                     {{ ingredient_form.unit }}
+                    {{ ingredient_form.id }}
                     {% if ingredient_form.instance.pk %}
-                        {{ ingredient_form.DELETE }} <label>Usuń</label>
+                        {{ ingredient_form.DELETE }}
+                        <label>DELETE</label>
                     {% endif %}
                 </div>
             {% endfor %}
 
-            <button type="submit">Zapisz</button>
+            <button type="submit">SUBMIT</button>
         </form>
     </div>
 </section>
