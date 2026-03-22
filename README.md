@@ -2,6 +2,7 @@
 
 Na wstępie chciałabym zaznaczyć, że wiem, że nie jest to REST API. Przeoczyłam to w wymaganiach - napisałam do Was w tej sprawie maila :) 
 
+https://ixgvah.pythonanywhere.com/
 
 ## Setup
 
