@@ -1,3 +1,4 @@
+from django.db.models import ProtectedError
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Cocktail, UsersFavouriteCocktails, Ingredient, CocktailIngrediets
@@ -130,8 +131,13 @@ def delete_ingredient(request, pk):
     ingredient = get_object_or_404(Ingredient, pk=pk)
     form = IngredientForm(request.POST, request.FILES, instance=ingredient)
     if request.method == 'POST':
-        ingredient.delete()
-        return redirect('ingredients_list')
+        try:
+            ingredient.delete()
+            return redirect('ingredients_list')
+        except ProtectedError:
+            return render(request, 'ingredients/edit_ingredient.html', {
+                'error': 'You cannot delete an ingredient connected to a cocktail'
+            })
 
 @login_required
 def create_ingredient(request):

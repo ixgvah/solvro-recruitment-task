@@ -30,7 +30,7 @@ class Cocktail(models.Model):
 
 class CocktailIngrediets(models.Model):
     cocktail = models.ForeignKey(Cocktail, on_delete=models.CASCADE)
-    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.PROTECT)
     quantity = models.IntegerField(default=1)
     POSSIBLE_UNITS = [
         ('ml', 'ml'),
