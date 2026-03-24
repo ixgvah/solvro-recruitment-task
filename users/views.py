@@ -1,36 +1,36 @@
-from django.shortcuts import render, redirect
-from .forms import CustomUserCreationForm
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, authenticate, logout
+from rest_framework import generics, status, permissions
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from rest_framework.authtoken.models import Token
+from django.contrib.auth import authenticate, login, logout
+from .serializers import UserRegisterSerializer
+from django.contrib.auth import get_user_model
+from .serializers import UserRegisterSerializer
 
-def register_view(request):
-    if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            print("zapisano")
-            return redirect('/cocktails/')
-        else:
-            print(form.errors)
-    else:
-        form = CustomUserCreationForm()
-    return render(request, "users/register.html", {"form": form})
+User = get_user_model()
 
+
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserRegisterSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+@api_view(['POST'])
 def login_view(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            return redirect('/cocktails/')
-        else:
-            print(form.errors)
+    username = request.data.get('username')
+    password = request.data.get('password')
+    user = authenticate(username=username, password=password)
+
+    if user:
+        token, _ = Token.objects.get_or_create(user=user)
+        return Response({'token': token.key}, status=200)
+
+    return Response({'error': 'No account is suitable for this login'}, status=400)
 
 
-    else:
-        form = AuthenticationForm()
-    return render(request, 'users/login.html', {"form": form})
-
+@api_view(['POST'])
 def logout_view(request):
-    logout(request)
-    return redirect('/')
+    request.user.auth_token.delete()
+    return Response({"message": "Wylogowano"}, status=204)
+

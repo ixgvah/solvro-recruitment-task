@@ -1,10 +1,11 @@
-from django.shortcuts import *
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
 
-def homePage(request):
-    return render(request, 'home.html')
-
-def about(request):
-    return render(request, 'about.html')
-
-def mix_your_drinks(request):
-    return render(request, "mix-your-drinks.html")
+@api_view(['GET'])
+def api_root(request):
+    return Response({
+        'cocktails': reverse('cocktail-list', request=request),
+        'ingredients': reverse('ingredient-list', request=request),
+        'users': reverse('user-list', request=request),
+    })

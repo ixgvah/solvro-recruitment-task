@@ -1,16 +1,13 @@
 from django.contrib import admin
 from django.urls import path, include
-from . import views
+from django.shortcuts import redirect  # To już masz
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.homePage),
-    path('about/', views.about),
-    path('mix-your-drinks/', views.mix_your_drinks),
-    path('cocktails/', include('cocktails.urls')),
-    path('users/', include('users.urls')),
+    path('', lambda request: redirect('api/cocktails/', permanent=False)),
+    path('api/', include('cocktails.urls')),
+    path('api/auth/', include('users.urls')),
+    path('api-auth/', include('rest_framework.urls')), #doda logowanie!!!
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-#tu nie dodawaj name

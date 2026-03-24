@@ -1,6 +1,6 @@
 # CocktailMIX
 
-Na wstępie chciałabym zaznaczyć, że wiem, że nie jest to REST API. Przeoczyłam to w wymaganiach - napisałam do Was w tej sprawie maila :) 
+Drogi Widzu, zapraszam na wersje REST API
 
 https://ixgvah.pythonanywhere.com/
 

@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Cocktail, Ingredient, CocktailIngrediets
+from .models import Cocktail, Ingredient, CocktailIngredients
 
 # Register your models here.
 
 admin.site.register(Cocktail)
 admin.site.register(Ingredient)
-admin.site.register(CocktailIngrediets)
+admin.site.register(CocktailIngredients)

@@ -1,151 +1,49 @@
-from django.db.models import ProtectedError
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from .models import Cocktail, UsersFavouriteCocktails, Ingredient, CocktailIngrediets
-from .forms import CocktailForm, CocktailIngredientFormSet, IngredientForm
-from django.core.paginator import Paginator
+from rest_framework import generics, permissions, status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .models import Cocktail, UsersFavouriteCocktails, Ingredient
+from .serializers import CocktailSerializer, IngredientSerializer
 
 
-def cocktails_list(request):
-    cocktails = Cocktail.objects.all()
-    paginator = Paginator(cocktails, 5)
-    page = request.GET.get('page')
-    cocktails = paginator.get_page(page)
-    return render(request, 'cocktails/cocktails_list.html', {'cocktails':cocktails})
+class CocktailList(generics.ListCreateAPIView):
+    serializer_class = CocktailSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly] #zalogowany moze wykonac POST, niezalogowany tylko odczyt
 
-def user_cocktails(request):
-    cocktails = request.user.cocktails.all()
-    return render(request, 'cocktails/user_cocktails.html', {'user': request.user, 'cocktails':cocktails})
+    def get_queryset(self):
+        queryset = Cocktail.objects.all()
+        filter = self.request.query_params.get('filter')
 
-@login_required
-def create_cocktail(request):
-    if request.method == 'POST':
-        form = CocktailForm(request.POST, request.FILES)
-        formset = CocktailIngredientFormSet(request.POST)
-        if form.is_valid() and formset.is_valid():
-            cocktail = form.save(commit=False)
-            cocktail.user = request.user
-            cocktail.save()
-            formset.instance = cocktail  # ← przypisz instancję przed zapisem
-            formset.save()
-            return redirect('/cocktails/')
-    else:
-        form = CocktailForm()
-        formset = CocktailIngredientFormSet()
+        if filter == 'mine' and self.request.user.is_authenticated: #zabezpieczenie
+            return queryset.filter(user=self.request.user)
 
-    return render(request, 'cocktails/create_cocktail.html', {
-        'form': form,
-        'formset': formset,
-    })
+        if filter == 'fav' and self.request.user.is_authenticated:
+            return queryset.filter(favorited_by__user=self.request.user)
+        return queryset
 
-@login_required
-def edit_cocktail(request, pk):
-    cocktail = get_object_or_404(Cocktail, pk=pk)
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
-    if request.method == 'POST':
-        form = CocktailForm(request.POST, request.FILES, instance=cocktail)
-        formset = CocktailIngredientFormSet(request.POST, instance=cocktail)
-        if form.is_valid() and formset.is_valid():
-            form.save()
-            formset.save()
-            return redirect('cocktail_details', pk=pk)
-    else:
-        form = CocktailForm(instance=cocktail)
-        formset = CocktailIngredientFormSet(instance=cocktail)
-
-    return render(request, 'cocktails/edit_cocktail.html', {
-        'cocktail': cocktail,
-        'form': form,
-        'formset': formset,
-    })
-
-@login_required
-def delete_cocktail(request, pk):
-    cocktail = get_object_or_404(Cocktail, pk=pk, user=request.user)
-    if request.method == 'POST':
-        cocktail.delete()
-        return redirect('/cocktails/')
-
-@login_required
-def starred_cocktails(request):
-    favourites = UsersFavouriteCocktails.objects.filter(user=request.user).values_list('cocktail', flat=True)
-    cocktails = Cocktail.objects.filter(id__in=favourites)
-    return render(request, 'cocktails/user_favourite_cocktails.html', {'cocktails': cocktails})
-
-@login_required
-def add_favourite(request, pk):
-    cocktail = get_object_or_404(Cocktail, pk=pk)
-    UsersFavouriteCocktails.objects.get_or_create(user=request.user, cocktail=cocktail)
-    return redirect('/cocktails/')
-
-@login_required
-def remove_favourite(request, pk):
-    UsersFavouriteCocktails.objects.filter(user=request.user, cocktail__pk=pk).delete()
-    return redirect('/cocktails/')
-
-@login_required
-def toggle_star(request, pk):
-    cocktail = get_object_or_404(Cocktail, pk=pk)
-    fav, created = UsersFavouriteCocktails.objects.get_or_create(
-        user=request.user, cocktail=cocktail)
-    if not created:
-        fav.delete()
-    return redirect(request.META.get('HTTP_REFERER', '/cocktails/'))
-
-@login_required
-def ingredients_list(request):
-    ingredients = Ingredient.objects.all()
-    paginator = Paginator(ingredients, 5)
-    page = request.GET.get('page')
-    ingredients = paginator.get_page(page)
-    return render(request, 'ingredients/ingredients_list.html', {'ingredients':ingredients})
-
-from .models import CocktailIngrediets
-
-def cocktail_details(request, pk):
-    cocktail = get_object_or_404(Cocktail, pk=pk)
-    ingredients = CocktailIngrediets.objects.filter(cocktail=cocktail).select_related('ingredient')
-    return render(request, 'cocktails/cocktail_details.html', {
-        'cocktail': cocktail,
-        'ingredients': ingredients,
-    })
+class CocktailDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Cocktail.objects.all()
+    serializer_class = CocktailSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
+class IngredientList(generics.ListCreateAPIView):
+    serializer_class = IngredientSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        queryset = Ingredient.objects.all()
+
+        return queryset
+
+    def perform_create(self, serializer):
+        serializer.save() #tym razem bez user=self.request.user bo nie przy[isujemy autora do skladnika
 
 
-@login_required
-def edit_ingredient(request, pk):
-    ingredient = get_object_or_404(Ingredient, pk=pk)
-    if request.method == 'POST':
-        form = IngredientForm(request.POST, request.FILES, instance=ingredient)
-        if form.is_valid():
-            form.save()
-            return redirect('ingredients_list')
-    else:
-        form = IngredientForm(instance=ingredient)
+class IngredientDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Ingredient.objects.all()
+    serializer_class = IngredientSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-    return render(request, 'ingredients/edit_ingredient.html', {'form': form})
-
-@login_required
-def delete_ingredient(request, pk):
-    ingredient = get_object_or_404(Ingredient, pk=pk)
-    form = IngredientForm(request.POST, request.FILES, instance=ingredient)
-    if request.method == 'POST':
-        try:
-            ingredient.delete()
-            return redirect('ingredients_list')
-        except ProtectedError:
-            return render(request, 'ingredients/delete_ingredient.html', {'ingredient': ingredient,
-                'error': 'You cannot delete an ingredient connected to a cocktail'})
-
-
-@login_required
-def create_ingredient(request):
-    if request.method == 'POST':
-        form = IngredientForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('ingredients_list')
-    else:
-        form = IngredientForm()
-    return render(request, 'ingredients/create_ingredient.html', {'form': form})
