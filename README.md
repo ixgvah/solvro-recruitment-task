@@ -1,7 +1,8 @@
 # CocktailMIX
 
-Na wstępie chciałabym zaznaczyć, że wiem, że nie jest to REST API. Przeoczyłam to w wymaganiach - napisałam do Was w tej sprawie maila :) 
-
+Na wstępie chciałabym zaznaczyć, że wiem, że nie jest to REST API. Przeoczyłam to w wymaganiach - napisałam do Was w tej sprawie maila :)
+REST API na drugk branchu: https://github.com/ixgvah/solvro-recruitment-task/tree/restapi
+ixgvah.pythonanywhere.com/
 
 ## Setup
 
