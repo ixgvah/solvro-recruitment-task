@@ -2,7 +2,8 @@
 
 Na wstępie chciałabym zaznaczyć, że wiem, że nie jest to REST API. Przeoczyłam to w wymaganiach - napisałam do Was w tej sprawie maila :) 
 
-https://ixgvah.pythonanywhere.com/
+Link do aplikacji: https://ixgvah.pythonanywhere.com/
+REST API na drugim branchu: https://github.com/ixgvah/solvro-recruitment-task/tree/restapi
 
 ## Setup
 
