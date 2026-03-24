@@ -1,10 +1,18 @@
 # CocktailMIX
 
-Na wstępie chciałabym zaznaczyć, że wiem, że nie jest to REST API. Przeoczyłam to w wymaganiach - napisałam do Was w tej sprawie maila :)
-REST API na drugk branchu: https://github.com/ixgvah/solvro-recruitment-task/tree/restapi
-ixgvah.pythonanywhere.com/
+Na wstępie chciałabym zaznaczyć, że wiem, że nie jest to REST API. Przeoczyłam to w wymaganiach - napisałam do Was w tej sprawie maila :) 
+
+Link do aplikacji: https://ixgvah.pythonanywhere.com/
+REST API na drugim branchu: https://github.com/ixgvah/solvro-recruitment-task/tree/restapi
 
 ## Setup
+
+1. Sklonuj repo: 
+```bash
+git clone https://github.com/ixgvah/solvro-recruitment-task.git
+cd solvro-recruitment-task
+```
+
 
 1. Sklonuj repo: 
 ```bash
